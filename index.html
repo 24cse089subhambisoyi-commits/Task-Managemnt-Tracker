@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TASK MANAGEMENT TRACKER</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- MAIN APP PAGE -->
+<div id="app-page">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="logo">
+    <div class="logo-icon">✅</div>
+    <div class="logo-text">Task Management Tracker <span>GIET PROJECT</span></div>
+  </div>
+
+  <!-- User info in sidebar -->
+  <div class="sidebar-user">
+    <div class="sidebar-avatar" id="sb-avatar">S</div>
+    <div class="sidebar-user-info">
+      <div class="sidebar-user-name" id="sb-uname">User</div>
+      <div class="sidebar-user-role">Task Manager</div>
+    </div>
+    <button class="logout-btn" onclick="doLogout()" title="Logout">⏏</button>
+  </div>
+
+  <div class="nav-label">Navigation</div>
+  <button class="nav-btn active" onclick="setFilter('all',this)">
+    <span class="nav-icon">🗂️</span> All Tasks <span class="nav-badge" id="sb-all">0</span>
+  </button>
+  <button class="nav-btn" onclick="setFilter('pending',this)">
+    <span class="nav-icon">⏳</span> Pending <span class="nav-badge" id="sb-pending">0</span>
+  </button>
+  <button class="nav-btn" onclick="setFilter('inprogress',this)">
+    <span class="nav-icon">⚙️</span> In Progress <span class="nav-badge" id="sb-inprogress">0</span>
+  </button>
+  <button class="nav-btn" onclick="setFilter('completed',this)">
+    <span class="nav-icon">✅</span> Completed <span class="nav-badge" id="sb-completed">0</span>
+  </button>
+
+  <div class="sidebar-divider"></div>
+  <div class="nav-label">Priority</div>
+  <button class="nav-btn" onclick="setFilter('high',this)">
+    <span class="nav-icon">🔴</span> High Priority <span class="nav-badge" id="sb-high">0</span>
+  </button>
+  <button class="nav-btn" onclick="setFilter('medium',this)">
+    <span class="nav-icon">🟡</span> Medium <span class="nav-badge" id="sb-medium">0</span>
+  </button>
+  <button class="nav-btn" onclick="setFilter('low',this)">
+    <span class="nav-icon">🔵</span> Low <span class="nav-badge" id="sb-low">0</span>
+  </button>
+
+  <div class="sidebar-divider"></div>
+  <div class="progress-card">
+    <div class="progress-card-title">Overall Progress</div>
+    <div class="progress-ring-wrap">
+      <div class="progress-circle">
+        <svg width="52" height="52" viewBox="0 0 52 52">
+          <circle class="bg" cx="26" cy="26" r="21"/>
+          <circle class="fg" id="ring-fg" cx="26" cy="26" r="21" stroke-dasharray="131.9" stroke-dashoffset="131.9"/>
+        </svg>
+        <div class="pct" id="ring-pct">0%</div>
+      </div>
+      <div class="progress-meta">
+        <div class="pm-done"><span id="done-count">0</span>/<span id="total-count">0</span></div>
+        <div class="pm-label">Tasks completed</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+  <header class="header">
+    <div class="header-title">📋 TASK MANAGEMENT TRACKER</div>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search-input" placeholder="Search tasks…" oninput="renderTasks()" />
+    </div>
+    <!-- User chip in header -->
+    <div class="header-user">
+      <div class="header-avatar" id="hdr-avatar">S</div>
+      <span class="header-username" id="hdr-uname">User</span>
+    </div>
+    <button class="btn-add" onclick="openModal()">＋ Add Task</button>
+  </header>
+
+  <div class="stats-bar">
+    <div class="stat-card">
+      <div class="stat-icon total">📦</div>
+      <div><div class="stat-val" id="stat-total">0</div><div class="stat-lbl">Total Tasks</div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon done">✅</div>
+      <div><div class="stat-val" id="stat-done" style="color:var(--green)">0</div><div class="stat-lbl">Completed</div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon prog">⚙️</div>
+      <div><div class="stat-val" id="stat-prog" style="color:var(--orange)">0</div><div class="stat-lbl">In Progress</div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon pend">⏳</div>
+      <div><div class="stat-val" id="stat-pend">0</div><div class="stat-lbl">Pending</div></div>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-tab active" onclick="setFilter('all',this)">All</button>
+    <button class="filter-tab" onclick="setFilter('pending',this)">Pending</button>
+    <button class="filter-tab" onclick="setFilter('inprogress',this)">In Progress</button>
+    <button class="filter-tab" onclick="setFilter('completed',this)">Completed</button>
+    <div class="sort-wrap">
+      <span style="font-size:13px;color:var(--muted)">Sort:</span>
+      <select class="sort-select" id="sort-select" onchange="renderTasks()">
+        <option value="newest">Newest First</option>
+        <option value="oldest">Oldest First</option>
+        <option value="due">Due Date</option>
+        <option value="priority">Priority</option>
+        <option value="alpha">A → Z</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="task-grid" id="task-grid"></div>
+</main>
+
+</div><!-- /#app-page -->
+
+<!-- AI BUTTON -->
+<button class="ai-btn-float" id="ai-float-btn" onclick="toggleAI()" title="AI Assistant">🤖</button>
+
+<!-- AI PANEL -->
+<div class="ai-panel" id="ai-panel">
+  <div class="ai-header">
+    <div class="ai-avatar">🤖</div>
+    <div style="flex:1">
+      <div class="ai-title">AI Assistant</div>
+      <div class="ai-status">Online</div>
+    </div>
+    <button class="ai-close" onclick="toggleAI()">✕</button>
+  </div>
+  <div class="ai-messages" id="ai-messages">
+    <div class="ai-msg bot">
+      <div class="ai-msg-icon">🤖</div>
+      <div class="ai-bubble">
+        Hey! I'm your AI task assistant 👋<br><br>
+        I can help you:<br>
+        • Summarize your tasks<br>
+        • Suggest what to work on next<br>
+        • Analyze your productivity<br>
+        • Answer anything about your project!
+      </div>
+    </div>
+  </div>
+  <div class="ai-suggestions">
+    <span class="ai-sug" onclick="sendAISug(this)">📊 Summarize my tasks</span>
+    <span class="ai-sug" onclick="sendAISug(this)">🎯 What to do next?</span>
+    <span class="ai-sug" onclick="sendAISug(this)">⚠️ Overdue tasks?</span>
+    <span class="ai-sug" onclick="sendAISug(this)">💡 Productivity tips</span>
+  </div>
+  <div class="ai-input-wrap">
+    <input class="ai-input" id="ai-input" placeholder="Ask me anything about your tasks…" onkeydown="if(event.key==='Enter')sendAI()" />
+    <button class="ai-send" onclick="sendAI()">➤</button>
+  </div>
+</div>
+
+<!-- ADD/EDIT MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-title">Add New Task</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Task Title *</label>
+      <input class="form-input" id="f-title" placeholder="Enter task title…" />
+    </div>
+    <div class="form-group">
+      <label class="form-label">Description</label>
+      <textarea class="form-textarea" id="f-desc" placeholder="Add description (optional)…"></textarea>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Status</label>
+        <select class="form-select" id="f-status">
+          <option value="pending">⏳ Pending</option>
+          <option value="inprogress">⚙️ In Progress</option>
+          <option value="completed">✅ Completed</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Priority</label>
+        <select class="form-select" id="f-priority">
+          <option value="medium">🟡 Medium</option>
+          <option value="high">🔴 High</option>
+          <option value="low">🔵 Low</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Due Date</label>
+        <input class="form-input" type="date" id="f-due" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Progress %</label>
+        <input class="form-input" type="number" id="f-progress" min="0" max="100" value="0" placeholder="0–100" />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-save" onclick="saveTask()">Save Task</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<script src="script.js"></script>
+<script>
+  // Auth guard — agar session nahi hai toh login.html par bhejo
+  window.addEventListener('DOMContentLoaded', () => {
+    const s = getSession();
+    if (!s || !s.email) {
+      window.location.href = 'login.html';
+      return;
+    }
+    // User UI update
+    const initial = s.name.charAt(0).toUpperCase();
+    document.getElementById('sb-avatar').textContent = initial;
+    document.getElementById('sb-uname').textContent = s.name;
+    document.getElementById('hdr-avatar').textContent = initial;
+    document.getElementById('hdr-uname').textContent = s.name;
+
+    // Boot app
+    seedTasks();
+    renderTasks();
+  });
+
+  // Modal click-outside close
+  document.getElementById('modal').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeModal();
+  });
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', e => {
+    if (e.key === 'n' && !e.ctrlKey && !e.metaKey &&
+        document.activeElement.tagName !== 'INPUT' &&
+        document.activeElement.tagName !== 'TEXTAREA') openModal();
+    if (e.key === 'Escape') closeModal();
+  });
+</script>
+</body>
+</html>
