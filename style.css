@@ -30,9 +30,7 @@ body {
   overflow-x: hidden;
 }
 
-/* ══════════════════════════════════════════
-   LOGIN PAGE
-══════════════════════════════════════════ */
+
 #login-page {
   min-height: 100vh;
   display: flex;
@@ -218,12 +216,10 @@ body {
 .success-msg { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; color: var(--green); }
 .success-sub { font-size: 14px; color: var(--muted); }
 
-/* ══════════════════════════════════════════
-   MAIN APP
-══════════════════════════════════════════ */
+
 #app-page { display: flex; flex-direction: row; min-height: 100vh; }
 
-/* Sidebar */
+
 .sidebar {
   width: 240px; min-height: 100vh;
   background: var(--surface); border-right: 1px solid var(--border);
@@ -276,7 +272,7 @@ body {
 .progress-meta .pm-done { font-size: 20px; font-weight: 700; font-family: 'Syne', sans-serif; color: var(--text); }
 .progress-meta .pm-label { font-size: 11px; color: var(--muted); }
 
-/* Main */
+
 .main { margin-left: 240px; flex: 1; display: flex; flex-direction: column; min-height: 100vh; }
 
 .header { padding: 20px 28px; background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 16px; position: sticky; top: 0; z-index: 50; }
@@ -352,7 +348,7 @@ body {
 .task-progress-bar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
 .task-progress-fill { height: 100%; border-radius: 2px; transition: width .4s ease; }
 
-/* Modal */
+
 .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.7); backdrop-filter: blur(4px); z-index: 1000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .22s; }
 .modal-overlay.open { opacity: 1; pointer-events: all; }
 .modal { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; width: 520px; max-width: 95vw; padding: 28px; box-shadow: 0 24px 64px rgba(0,0,0,.8); transform: scale(.95); transition: transform .22s; }
@@ -374,7 +370,7 @@ body {
 .btn-save { padding: 10px 24px; border-radius: 8px; border: none; background: var(--green); color: #0d1117; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: .18s; }
 .btn-save:hover { background: #3aaa49; }
 
-/* AI Panel */
+
 .ai-panel { position: fixed; right: 0; top: 0; bottom: 0; width: 360px; background: var(--surface); border-left: 1px solid var(--border); display: flex; flex-direction: column; z-index: 200; transform: translateX(100%); transition: transform .3s cubic-bezier(.4,0,.2,1); }
 .ai-panel.open { transform: translateX(0); }
 .ai-header { padding: 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; }
@@ -407,17 +403,17 @@ body {
 .ai-sug { padding: 5px 12px; border-radius: 20px; border: 1px solid var(--border); background: var(--card); color: var(--muted); font-size: 12px; cursor: pointer; transition: .15s; }
 .ai-sug:hover { border-color: #7c3aed; color: #a78bfa; }
 
-/* Scrollbar */
+
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
 
-/* Delete confirm */
+
 .del-confirm { display: flex; gap: 6px; margin-top: 8px; }
 .del-yes { padding: 4px 12px; border-radius: 6px; border: none; background: var(--red); color: white; font-size: 12px; font-weight: 600; cursor: pointer; }
 .del-no  { padding: 4px 12px; border-radius: 6px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-size: 12px; cursor: pointer; }
 
-/* Toast */
+
 #toast-container { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 9999; display: flex; flex-direction: column; gap: 8px; align-items: center; pointer-events: none; }
 .toast { padding: 12px 22px; border-radius: 10px; font-size: 14px; font-weight: 500; box-shadow: 0 8px 24px rgba(0,0,0,.5); animation: toastIn .3s ease; pointer-events: none; }
 @keyframes toastIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
@@ -425,7 +421,7 @@ body {
 .toast.error   { background: var(--red); color: white; }
 .toast.info    { background: #4f46e5; color: white; }
 
-/* Responsive */
+
 @media (max-width: 900px) {
   .sidebar { display: none; }
   .main { margin-left: 0; }
