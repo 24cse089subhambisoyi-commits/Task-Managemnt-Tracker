@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<!-- LOGIN PAGE -->
+
 <div id="login-page">
   <div class="login-bg"></div>
   <div class="orb orb-1"></div>
@@ -23,16 +23,16 @@
     <div class="login-heading" id="login-heading">Welcome Back 👋</div>
     <div class="login-sub">Sign in or create an account to manage your tasks</div>
 
-    <!-- Tab switcher -->
+ 
     <div class="auth-tabs">
       <button class="auth-tab active" id="tab-login" onclick="switchTab('login')">🔑 Login</button>
       <button class="auth-tab" id="tab-signup" onclick="switchTab('signup')">✨ Sign Up</button>
     </div>
 
-    <!-- Error banner -->
+   
     <div class="login-error" id="login-error">⚠️ <span id="error-text"></span></div>
 
-    <!-- Name (Signup only) -->
+
     <div class="login-field name-only" id="field-name">
       <div class="login-label"><span class="lbl-icon">👤</span> Full Name</div>
       <div class="input-wrap">
@@ -42,7 +42,7 @@
       <div class="field-hint" id="hint-name"></div>
     </div>
 
-    <!-- Email -->
+  
     <div class="login-field">
       <div class="login-label"><span class="lbl-icon">📧</span> Email Address</div>
       <div class="input-wrap">
@@ -52,7 +52,7 @@
       <div class="field-hint" id="hint-email"></div>
     </div>
 
-    <!-- Password -->
+   
     <div class="login-field">
       <div class="login-label"><span class="lbl-icon">🔒</span> Password <span style="color:var(--muted);font-size:10px;font-weight:400;letter-spacing:0;text-transform:none;margin-left:4px">(min. 6 characters)</span></div>
       <div class="input-wrap">
@@ -61,7 +61,7 @@
         <button class="input-eye" id="eye-btn" onclick="toggleEye()" type="button">👁️</button>
       </div>
       <div class="field-hint" id="hint-pwd"></div>
-      <!-- Strength bar (signup only) -->
+     
       <div class="pwd-strength name-only" id="pwd-strength">
         <div class="pwd-bar-track"><div class="pwd-bar-fill" id="pwd-bar"></div></div>
         <div class="pwd-bar-label" id="pwd-bar-label">Strength: —</div>
@@ -79,7 +79,7 @@
   </div>
 </div>
 
-<!-- Success overlay -->
+
 <div class="login-success-overlay" id="success-overlay">
   <div class="success-icon">✅</div>
   <div class="success-msg" id="success-msg">Welcome back!</div>
@@ -88,7 +88,7 @@
 
 <script src="script.js"></script>
 <script>
-  // Auto-redirect if already logged in
+
   window.addEventListener('DOMContentLoaded', () => {
     const s = getSession();
     if (s && s.email) {
