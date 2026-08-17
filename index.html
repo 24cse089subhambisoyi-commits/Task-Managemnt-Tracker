@@ -8,17 +8,14 @@
 </head>
 <body>
 
-<!-- MAIN APP PAGE -->
 <div id="app-page">
 
-<!-- SIDEBAR -->
 <aside class="sidebar">
   <div class="logo">
     <div class="logo-icon">✅</div>
     <div class="logo-text">Task Management Tracker <span>GIET PROJECT</span></div>
   </div>
 
-  <!-- User info in sidebar -->
   <div class="sidebar-user">
     <div class="sidebar-avatar" id="sb-avatar">S</div>
     <div class="sidebar-user-info">
@@ -73,7 +70,6 @@
   </div>
 </aside>
 
-<!-- MAIN CONTENT -->
 <main class="main">
   <header class="header">
     <div class="header-title">📋 TASK MANAGEMENT TRACKER</div>
@@ -81,7 +77,7 @@
       <span class="search-icon">🔍</span>
       <input type="text" id="search-input" placeholder="Search tasks…" oninput="renderTasks()" />
     </div>
-    <!-- User chip in header -->
+
     <div class="header-user">
       <div class="header-avatar" id="hdr-avatar">S</div>
       <span class="header-username" id="hdr-uname">User</span>
@@ -128,12 +124,12 @@
   <div class="task-grid" id="task-grid"></div>
 </main>
 
-</div><!-- /#app-page -->
+</div>
 
-<!-- AI BUTTON -->
+
 <button class="ai-btn-float" id="ai-float-btn" onclick="toggleAI()" title="AI Assistant">🤖</button>
 
-<!-- AI PANEL -->
+
 <div class="ai-panel" id="ai-panel">
   <div class="ai-header">
     <div class="ai-avatar">🤖</div>
@@ -168,7 +164,7 @@
   </div>
 </div>
 
-<!-- ADD/EDIT MODAL -->
+
 <div class="modal-overlay" id="modal">
   <div class="modal">
     <div class="modal-header">
@@ -222,31 +218,31 @@
 
 <script src="script.js"></script>
 <script>
-  // Auth guard — agar session nahi hai toh login.html par bhejo
+  
   window.addEventListener('DOMContentLoaded', () => {
     const s = getSession();
     if (!s || !s.email) {
       window.location.href = 'login.html';
       return;
     }
-    // User UI update
+   
     const initial = s.name.charAt(0).toUpperCase();
     document.getElementById('sb-avatar').textContent = initial;
     document.getElementById('sb-uname').textContent = s.name;
     document.getElementById('hdr-avatar').textContent = initial;
     document.getElementById('hdr-uname').textContent = s.name;
 
-    // Boot app
+   
     seedTasks();
     renderTasks();
   });
 
-  // Modal click-outside close
+  
   document.getElementById('modal').addEventListener('click', e => {
     if (e.target === e.currentTarget) closeModal();
   });
 
-  // Keyboard shortcuts
+  
   document.addEventListener('keydown', e => {
     if (e.key === 'n' && !e.ctrlKey && !e.metaKey &&
         document.activeElement.tagName !== 'INPUT' &&
