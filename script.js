@@ -1,6 +1,4 @@
-// ══════════════════════════════════════════
-// AUTH LOGIC
-// ══════════════════════════════════════════
+
 const USERS_KEY   = 'tmt-users';
 const SESSION_KEY = 'tmt-session';
 
@@ -12,7 +10,6 @@ function getSession()     { return JSON.parse(localStorage.getItem(SESSION_KEY) 
 function saveSession(u)   { localStorage.setItem(SESSION_KEY, JSON.stringify(u)); }
 function clearSession()   { localStorage.removeItem(SESSION_KEY); }
 
-// ── Tab switch ──────────────────────────────────────────────
 function switchTab(tab) {
   currentTab = tab;
   document.getElementById('tab-login').classList.toggle('active', tab === 'login');
@@ -27,7 +24,7 @@ function switchTab(tab) {
   clearHints();
 }
 
-// ── Validation ──────────────────────────────────────────────
+
 function setHint(id, msg, type) {
   const el = document.getElementById(id);
   if (!el) return;
@@ -93,7 +90,7 @@ function updateBar(len) {
   lbl.style.color      = color;
 }
 
-// ── Eye toggle ──────────────────────────────────────────────
+
 function toggleEye() {
   const inp  = document.getElementById('inp-pwd');
   const btn  = document.getElementById('eye-btn');
@@ -102,7 +99,7 @@ function toggleEye() {
   btn.textContent = show ? '🙈' : '👁️';
 }
 
-// ── Submit ──────────────────────────────────────────────────
+
 function handleSubmit() {
   hideError();
   const email = document.getElementById('inp-email').value.trim().toLowerCase();
@@ -140,7 +137,7 @@ function loginSuccess(user) {
   document.getElementById('success-msg').textContent =
     currentTab === 'signup' ? `Welcome, ${user.name}! 🎉` : `Welcome back, ${user.name}! 👋`;
   overlay.classList.add('show');
-  // Redirect to main app after success animation
+  
   setTimeout(() => { window.location.href = 'index.html'; }, 1800);
 }
 
@@ -149,7 +146,7 @@ function doLogout() {
   window.location.href = 'login.html';
 }
 
-// Enter key on login form
+
 document.addEventListener('keydown', e => {
   const loginPage = document.getElementById('login-page');
   if (e.key === 'Enter' && loginPage &&
@@ -158,9 +155,7 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// ══════════════════════════════════════════
-// TASK TRACKER LOGIC
-// ══════════════════════════════════════════
+
 let tasks   = JSON.parse(localStorage.getItem('tmt-tasks') || '[]');
 let filter  = 'all';
 let editing = null;
@@ -358,7 +353,7 @@ function updateStats() {
   if (ring) ring.style.strokeDashoffset = offset;
 }
 
-// ── AI Panel ──────────────────────────────────────────────
+
 let aiOpen = false;
 
 function toggleAI() {
@@ -438,7 +433,7 @@ function appendTyping() {
 }
 function removeTyping(id) { document.getElementById(id)?.remove(); }
 
-// ── Seed demo tasks ──────────────────────────────────────────
+
 function seedTasks() {
   if (tasks.length) return;
   const today   = new Date();
